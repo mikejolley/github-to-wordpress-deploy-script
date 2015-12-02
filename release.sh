@@ -99,6 +99,7 @@ rm -Rf tests
 rm -f .gitattributes
 rm -f .gitignore
 rm -f .gitmodules
+rm -f .editorconfig
 rm -f .travis.yml
 rm -f Gruntfile.js
 rm -f package.json
