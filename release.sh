@@ -95,6 +95,8 @@ read -p "PRESS [ENTER] TO DEPLOY BRANCH "${BRANCH}
 # REMOVE UNWANTED FILES & FOLDERS
 echo "Removing unwanted files"
 rm -Rf .git
+rm -Rf .github
+rm -Rf apigen
 rm -Rf tests
 rm -f .gitattributes
 rm -f .gitignore
@@ -109,7 +111,6 @@ rm -f composer.json
 rm -f phpunit.xml
 rm -f phpunit.xml.dist
 rm -f README.md
-rm -Rf apigen
 
 # MOVE INTO SVN DIR
 cd $ROOT_PATH$TEMP_SVN_REPO
