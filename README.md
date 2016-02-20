@@ -1,4 +1,4 @@
-# Github to WordPress.org Deployment Script
+# GitHub to WordPress.org Deployment Script
 We all know releasing plugins can be quite a chore, and deep down we all loath SVN so here is a neat little script for automating the process as much as possible.
 
 ## What this script does
