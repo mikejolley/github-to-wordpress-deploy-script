@@ -111,6 +111,7 @@ rm -f composer.json
 rm -f phpunit.xml
 rm -f phpunit.xml.dist
 rm -f README.md
+rm -f CHANGELOG.txt
 
 # MOVE INTO SVN DIR
 cd $ROOT_PATH$TEMP_SVN_REPO
