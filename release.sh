@@ -163,6 +163,7 @@ svn commit -m "Release "${VERSION}", see readme.txt for changelog." || { echo "U
 # REMOVE THE TEMP DIRS
 echo "CLEANING UP"
 rm -Rf $ROOT_PATH$TEMP_GITHUB_REPO
+rm -Rf $ROOT_PATH$TEMP_SVN_REPO
 
 # DONE, BYE
 echo "RELEASER DONE :D"
