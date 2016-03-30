@@ -1,5 +1,5 @@
 # Github to WordPress.org Deployment Script
-We all know releasing plugins can be quite a chore, and deep down we all loath SVN so here is a neat little script for automating the process as much as possible.
+We all know releasing plugins can be quite a chore, and deep down we all loathe SVN so here is a neat little script for automating the process as much as possible.
 
 ## What this script does
 This script will pull down your remote GIT and SVN repositories, tag a release using the branch you specify, and commit everything to WordPress.org.
