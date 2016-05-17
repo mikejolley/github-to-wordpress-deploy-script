@@ -24,6 +24,9 @@ GITHUB_ACCESS_TOKEN="TOKEN"
 # The slug of your WordPress.org plugin
 PLUGIN_SLUG="your-slug-here"
 
+# WordPress.org user name
+WP_USER_NAME="wordpress-org-username"
+
 # GITHUB user who owns the repo
 GITHUB_REPO_OWNER="username"
 
@@ -158,7 +161,7 @@ RESULT=$(curl --data "${API_JSON}" https://api.github.com/repos/${GITHUB_REPO_OW
 # DEPLOY
 echo ""
 echo "Committing to WordPress.org...this may take a while..."
-svn commit -m "Release "${VERSION}", see readme.txt for changelog." || { echo "Unable to commit."; exit 1; }
+svn commit -m "Release "${VERSION}", see readme.txt for changelog." --username ${WP_USER_NAME} || { echo "Unable to commit."; exit 1; }
 
 # REMOVE THE TEMP DIRS
 echo "CLEANING UP"
