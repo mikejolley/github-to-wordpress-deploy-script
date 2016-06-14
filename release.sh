@@ -96,12 +96,11 @@ read -p "PRESS [ENTER] TO DEPLOY BRANCH "${BRANCH}
 echo "Removing unwanted files"
 rm -Rf .git
 rm -Rf .github
-rm -Rf apigen
 rm -Rf tests
+rm -Rf apigen
 rm -f .gitattributes
 rm -f .gitignore
 rm -f .gitmodules
-rm -f .editorconfig
 rm -f .travis.yml
 rm -f Gruntfile.js
 rm -f package.json
@@ -111,6 +110,12 @@ rm -f composer.json
 rm -f phpunit.xml
 rm -f phpunit.xml.dist
 rm -f README.md
+rm -f .coveralls.yml
+rm -f .editorconfig
+rm -f .scrutinizer.yml
+rm -f apigen.neon
+rm -f CHANGELOG.txt
+rm -f CONTRIBUTING.md
 
 # MOVE INTO SVN DIR
 cd $ROOT_PATH$TEMP_SVN_REPO
