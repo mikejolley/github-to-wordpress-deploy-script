@@ -96,6 +96,7 @@ read -p "PRESS [ENTER] TO DEPLOY BRANCH "${BRANCH}
 echo "Removing unwanted files"
 rm -Rf .git
 rm -Rf .github
+rm -Rf .wordpress-org
 rm -Rf tests
 rm -Rf apigen
 rm -f .gitattributes
@@ -106,9 +107,13 @@ rm -f Gruntfile.js
 rm -f package.json
 rm -f .jscrsrc
 rm -f .jshintrc
+rm -f .stylelintrc
 rm -f composer.json
+rm -f composer.lock
 rm -f phpunit.xml
 rm -f phpunit.xml.dist
+rm -f dev.ruleset.xml
+rm -f phpcs.ruleset.xml
 rm -f README.md
 rm -f .coveralls.yml
 rm -f .editorconfig
@@ -116,6 +121,7 @@ rm -f .scrutinizer.yml
 rm -f apigen.neon
 rm -f CHANGELOG.txt
 rm -f CONTRIBUTING.md
+rm -f CODE_OF_CONDUCT.md
 
 # MOVE INTO SVN DIR
 cd $ROOT_PATH$TEMP_SVN_REPO
