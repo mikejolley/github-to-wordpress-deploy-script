@@ -98,7 +98,7 @@ rm -Rf .git
 rm -Rf .github
 rm -Rf tests
 rm -Rf apigen
-rm -Rf assets # wordpress plugin banners and icons
+rm -Rf wp-assets # wordpress plugin banners and icons
 rm -f .gitattributes
 rm -f .gitignore
 rm -f .gitmodules
