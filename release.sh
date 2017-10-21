@@ -112,7 +112,6 @@ rm -f composer.json
 rm -f composer.lock
 rm -f phpunit.xml
 rm -f phpunit.xml.dist
-rm -f dev.ruleset.xml
 rm -f phpcs.ruleset.xml
 rm -f README.md
 rm -f .coveralls.yml
