@@ -110,9 +110,9 @@ rm -f .jshintrc
 rm -f .stylelintrc
 rm -f composer.json
 rm -f composer.lock
+rm -f phpcs.xml
 rm -f phpunit.xml
 rm -f phpunit.xml.dist
-rm -f phpcs.ruleset.xml
 rm -f README.md
 rm -f .coveralls.yml
 rm -f .editorconfig
