@@ -89,7 +89,7 @@ read -p "origin/" BRANCH
 echo "Switching to branch"
 git checkout ${BRANCH} || { echo "Unable to checkout branch."; exit 1; }
 
-if [[ ! -f "composer.json" ]];
+if [[ -f "composer.json" ]];
 then
 	echo "Installing composer packages"
 	composer install
