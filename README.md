@@ -38,5 +38,5 @@ Here is a screencast of the process you'll typically see when running the script
 
 - This will checkout the remote version of your Github Repo.
 - Committing to WordPress.org can take a while so be patient.
-- I have tested this on Mac only.
+- I have tested this on ~~Mac~~ Ubuntu only.
 - Use at your own risk of course :)

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # By Mike Jolley, based on work by Barry Kooij ;)
 # License: GPL v3
@@ -72,10 +72,10 @@ fi
 
 # CLONE GIT DIR
 echo "Cloning GIT repository from GITHUB"
-git clone --progress $GIT_REPO $TEMP_GITHUB_REPO || { echo "Unable to clone repo."; exit 1; }
+git clone --progress --recurse-submodules $GIT_REPO $TEMP_GITHUB_REPO || { echo "Unable to clone repo."; exit 1; }
 
 # MOVE INTO GIT DIR
-cd $ROOT_PATH$TEMP_GITHUB_REPO
+cd "$ROOT_PATH$TEMP_GITHUB_REPO"
 
 # LIST BRANCHES
 clear
@@ -89,6 +89,12 @@ read -p "origin/" BRANCH
 echo "Switching to branch"
 git checkout ${BRANCH} || { echo "Unable to checkout branch."; exit 1; }
 
+if [[ -f "composer.json" ]];
+then
+	echo "Installing composer packages"
+	composer install
+fi
+
 echo ""
 read -p "PRESS [ENTER] TO DEPLOY BRANCH "${BRANCH}
 
@@ -99,6 +105,7 @@ rm -Rf .github
 rm -Rf .wordpress-org
 rm -Rf tests
 rm -Rf apigen
+rm -Rf wp-assets # wordpress plugin banners and icons
 rm -f .gitattributes
 rm -f .gitignore
 rm -f .gitmodules
@@ -123,7 +130,7 @@ rm -f CONTRIBUTING.md
 rm -f CODE_OF_CONDUCT.md
 
 # MOVE INTO SVN DIR
-cd $ROOT_PATH$TEMP_SVN_REPO
+cd "$ROOT_PATH$TEMP_SVN_REPO"
 
 # UPDATE SVN
 echo "Updating SVN"
@@ -134,7 +141,7 @@ echo "Replacing trunk"
 rm -Rf trunk/
 
 # COPY GIT DIR TO TRUNK
-cp -R $ROOT_PATH$TEMP_GITHUB_REPO trunk/
+cp -R "$ROOT_PATH$TEMP_GITHUB_REPO" trunk/
 
 # DO THE ADD ALL NOT KNOWN FILES UNIX COMMAND
 svn add --force * --auto-props --parents --depth infinity -q
@@ -173,8 +180,8 @@ svn commit -m "Release "${VERSION}", see readme.txt for the changelog." || { ech
 
 # REMOVE THE TEMP DIRS
 echo "CLEANING UP"
-rm -Rf $ROOT_PATH$TEMP_GITHUB_REPO
-rm -Rf $ROOT_PATH$TEMP_SVN_REPO
+rm -Rf "$ROOT_PATH$TEMP_GITHUB_REPO"
+rm -Rf "$ROOT_PATH$TEMP_SVN_REPO"
 
 # DONE, BYE
 echo "RELEASER DONE :D"
