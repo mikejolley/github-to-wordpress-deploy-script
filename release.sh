@@ -18,17 +18,17 @@
 
 # ----- START EDITING HERE -----
 
-# THE GITHUB ACCESS TOKEN, GENERATE ONE AT: https://github.com/settings/tokens
-GITHUB_ACCESS_TOKEN="TOKEN"
-
 # The slug of your WordPress.org plugin
-PLUGIN_SLUG="your-slug-here"
+PLUGIN_SLUG="your_slug_here"
 
 # GITHUB user who owns the repo
 GITHUB_REPO_OWNER="username"
 
 # GITHUB Repository name
-GITHUB_REPO_NAME="repo-name"
+GITHUB_REPO_NAME="repo_name"
+
+# Folder used to version the banner, icon and screenshots
+WP_ASSETS_FOLDER="_wp-assets"
 
 # ----- STOP EDITING HERE -----
 
@@ -39,7 +39,7 @@ clear
 echo "--------------------------------------------"
 echo "      Github to WordPress.org RELEASER      "
 echo "--------------------------------------------"
-read -p "TAG AND RELEASE VERSION: " VERSION
+read -p "RELEASE VERSION: " VERSION
 echo "--------------------------------------------"
 echo ""
 echo "Before continuing, confirm that you have done the following :)"
@@ -92,7 +92,7 @@ git checkout ${BRANCH} || { echo "Unable to checkout branch."; exit 1; }
 if [[ -f "composer.json" ]];
 then
 	echo "Installing composer packages"
-	composer install
+	composer install || { echo "Unable to install composer packages."; exit 1; }
 fi
 
 echo ""
@@ -104,7 +104,6 @@ rm -Rf .git
 rm -Rf .github
 rm -Rf tests
 rm -Rf apigen
-rm -Rf wp-assets # wordpress plugin banners and icons
 rm -f .gitattributes
 rm -f .gitignore
 rm -f .gitmodules
@@ -122,7 +121,10 @@ rm -f .editorconfig
 rm -f .scrutinizer.yml
 rm -f apigen.neon
 rm -f CHANGELOG.txt
+rm -f CHANGELOG.md
 rm -f CONTRIBUTING.md
+rm -f ${0} # don't deploy this file
+rm -Rf ${WP_ASSETS_FOLDER} # don't deploy WordPress plugin banners and icons
 
 # MOVE INTO SVN DIR
 cd "$ROOT_PATH$TEMP_SVN_REPO"
@@ -134,6 +136,9 @@ svn update || { echo "Unable to update SVN."; exit 1; }
 # DELETE TRUNK
 echo "Replacing trunk"
 rm -Rf trunk/
+
+# DELETE VERSION TAG
+rm -Rf tags/${VERSION}
 
 # COPY GIT DIR TO TRUNK
 cp -R "$ROOT_PATH$TEMP_GITHUB_REPO" trunk/
@@ -160,13 +165,8 @@ svn status
 
 # PROMPT USER
 echo ""
-read -p "PRESS [ENTER] TO COMMIT RELEASE "${VERSION}" TO WORDPRESS.ORG AND GITHUB"
+read -p "PRESS [ENTER] TO COMMIT RELEASE "${VERSION}" TO WORDPRESS.ORG"
 echo ""
-
-# CREATE THE GITHUB RELEASE
-echo "Creating GITHUB release"
-API_JSON=$(printf '{ "tag_name": "%s","target_commitish": "%s","name": "%s", "body": "Release of version %s", "draft": false, "prerelease": false }' $VERSION $BRANCH $VERSION $VERSION)
-RESULT=$(curl --data "${API_JSON}" https://api.github.com/repos/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/releases?access_token=${GITHUB_ACCESS_TOKEN})
 
 # DEPLOY
 echo ""
